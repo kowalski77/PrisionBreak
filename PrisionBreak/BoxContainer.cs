@@ -2,14 +2,14 @@
 
 namespace PrisionBreak;
 
-public class Playground : IReadOnlyList<Box>
+public class BoxContainer : IReadOnlyList<Box>
 {
     private readonly int[] numbers;
 
-    public Playground(int max)
+    public BoxContainer(int total)
     {
-        this.numbers = Enumerable.Range(1, max).ToArray();
-        this.Items = new List<Box>(max);
+        this.numbers = Enumerable.Range(1, total).ToArray();
+        this.Items = new List<Box>(total);
     }
 
     private List<Box> Items { get; }

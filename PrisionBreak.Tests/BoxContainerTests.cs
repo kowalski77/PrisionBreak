@@ -2,14 +2,14 @@ using FluentAssertions;
 
 namespace PrisionBreak.Tests;
 
-public class PlaygroundTests
+public class BoxContainerTests
 {
     [Fact]
     public void Scrumble_creates_boxes_accordingly()
     {
         // Arrange
         const int totalBoxes = 100;
-        var playground = new Playground(totalBoxes);
+        var playground = new BoxContainer(totalBoxes);
 
         // Act
         playground.Scramble();
@@ -26,7 +26,7 @@ public class PlaygroundTests
         // Arrange
         const int totalBoxes = 100;
         const int boxIdentifier = 32;
-        var playground = new Playground(totalBoxes);
+        var playground = new BoxContainer(totalBoxes);
         playground.Scramble();
 
         // Act

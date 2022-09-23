@@ -3,7 +3,7 @@ using PrisionBreak;
 
 Console.WriteLine("Hello, World!");
 
-var playground = new Playground(100);
+var playground = new BoxContainer(100);
 playground.Scramble();
 
 var path = playground.FindPath(32);
