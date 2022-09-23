@@ -2,35 +2,48 @@
 
 namespace PrisionBreak;
 
-public class BoxContainer : IReadOnlyList<Box>
+public class BoxContainer : IScrumbled<Box>
 {
-    private readonly int[] numbers;
-
-    public BoxContainer(IEnumerable<int> sequence)
+    public BoxContainer(IEnumerable<Box> sequence)
     {
-        this.numbers = sequence.ToArray();
-        this.Items = new List<Box>(numbers.Length);
-        this.Limit = numbers.Length / 2;
-        this.Scramble();
+        ArgumentNullException.ThrowIfNull(sequence);
+        this.Items = new List<Box>(sequence);
     }
 
     private List<Box> Items { get; }
 
+    public int Limit => Items.Count / 2;
+
     public int Count => this.Items.Count;
 
     public Box this[int index] => this.Items[index];
+    
+    public IScrumbled<Box> Scrumble()
+    {
+        var random = new Random();
+        var numbers = this.Items.Select(x => x.Number);
+        var scrambled = numbers.OrderBy(x => random.Next()).ToArray();
 
-    public int Limit { get; }
+        var boxList = new List<Box>();
+        var boxNumber = 1;
+        for (var i = 0; i < scrambled.Length; i++)
+        {
+            var box = new Box(boxNumber++, scrambled[i]);
+            boxList.Add(box);
+        }
 
-    public IReadOnlyList<Box> FindPath(int identifier)
+        return new BoxContainer(boxList);
+    }
+
+    public IReadOnlyList<Box> GetPath(int identifier)
     {
         var path = new List<Box>();
 
-        var box = this.Items.FirstOrDefault(x => x.Identifier == identifier.NonNegativeOrZero()) ?? 
+        var box = this.Items.FirstOrDefault(x => x.Identifier == identifier.NonNegativeOrZero()) ??
             throw new ArgumentException("Identifier not found", nameof(identifier));
-        
+
         path.Add(box);
-        
+
         while (box.Number != identifier)
         {
             box = this.Items.First(x => x.Identifier == box.Number);
@@ -40,20 +53,18 @@ public class BoxContainer : IReadOnlyList<Box>
         return path;
     }
 
+    public bool IsSuccess() => this.CheckPaths().Count(x => x) == 100;
+
+    private IEnumerable<bool> CheckPaths()
+    {
+        for (var i = 1; i <= this.Items.Count; i++)
+        {
+            var path = this.GetPath(i);
+            yield return path.Count <= this.Limit;
+        }
+    }
+
     public IEnumerator<Box> GetEnumerator() => this.Items.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-    private void Scramble()
-    {
-        var random = new Random();
-        var scrambled = this.numbers.OrderBy(x => random.Next()).ToArray();
-        var boxNumber = 1;
-        for (var i = 0; i < scrambled.Length; i++)
-        {
-            var box = new Box(boxNumber, scrambled[i]);
-            this.Items.Add(box);
-            boxNumber++;
-        }
-    }
 }

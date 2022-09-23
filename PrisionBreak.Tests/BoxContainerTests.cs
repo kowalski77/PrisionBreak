@@ -8,16 +8,16 @@ public class BoxContainerTests
     public void Scrumble_creates_boxes_accordingly()
     {
         // Arrange
-        const int totalBoxes = 100;
+        const int prisioners = 100;
 
         // Act
-        var playground = new BoxContainer(Enumerable.Range(1, totalBoxes));
+        var boxContainer = Enumerable.Range(1, prisioners).ToBoxContainer();
 
         // Assert
-        playground.Count.Should().Be(totalBoxes);
-        playground.Should().OnlyHaveUniqueItems();
-        playground.Should().OnlyContain(x => x.Identifier >= 1 && x.Identifier <= totalBoxes);
-        playground.Should().OnlyContain(x => x.Number >= 1 && x.Number <= totalBoxes);
+        boxContainer.Count.Should().Be(prisioners);
+        boxContainer.Should().OnlyHaveUniqueItems();
+        boxContainer.Should().OnlyContain(x => x.Identifier >= 1 && x.Identifier <= prisioners);
+        boxContainer.Should().OnlyContain(x => x.Number >= 1 && x.Number <= prisioners);
     }
 
     [Theory]
@@ -25,13 +25,13 @@ public class BoxContainerTests
     [InlineData(100, 57)]
     [InlineData(500, 234)]
     [InlineData(1000, 785)]
-    public void The_path_leads_to_the_box_with_the_identifier(int totalBoxes, int boxIdentifier)
+    public void The_path_leads_to_the_box_with_the_identifier(int prisioners, int boxIdentifier)
     {
         // Arrange
-        var playground = new BoxContainer(Enumerable.Range(1, totalBoxes));
+        var boxContainer = Enumerable.Range(1, prisioners).ToBoxContainer();
 
         // Act
-        var path = playground.FindPath(boxIdentifier);
+        var path = boxContainer.GetPath(boxIdentifier);
 
         // Assert
         path.Should().NotBeEmpty();

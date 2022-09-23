@@ -1,9 +1,12 @@
-﻿Console.WriteLine("Prision Break");
+﻿using PrisionBreak;
+
+Console.WriteLine("Prision Break");
 
 var prisoners = 100;
 
-var boxContainer = Enumerable.Range(1, prisoners).ToBoxContainer();
-
-var success = boxContainer.CheckPaths().IsSuccess();
+var success = Enumerable.Range(1, prisoners)
+    .ToBoxContainer()
+    .Scrumble()
+    .IsSuccess();
 
 Console.WriteLine($"Success: {success}");
