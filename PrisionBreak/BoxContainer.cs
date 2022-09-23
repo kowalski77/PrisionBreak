@@ -22,17 +22,9 @@ public class BoxContainer : IScrumbled<Box>
     {
         var random = new Random();
         var numbers = this.Items.Select(x => x.Number);
-        var scrambled = numbers.OrderBy(x => random.Next()).ToArray();
+        var scrambled = GetBoxes(numbers.OrderBy(x => random.Next()));
 
-        var boxList = new List<Box>();
-        var boxNumber = 1;
-        for (var i = 0; i < scrambled.Length; i++)
-        {
-            var box = new Box(boxNumber++, scrambled[i]);
-            boxList.Add(box);
-        }
-
-        return new BoxContainer(boxList);
+        return new BoxContainer(scrambled);
     }
 
     public IReadOnlyList<Box> GetPath(int identifier)
@@ -63,6 +55,16 @@ public class BoxContainer : IScrumbled<Box>
             yield return path.Count <= this.Limit;
         }
     }
+
+    private static IEnumerable<Box> GetBoxes(IEnumerable<int> numbers)
+    {
+        var boxNumber = 1;
+        foreach (var item in numbers)
+        {
+            yield return new Box(boxNumber++, item);
+        }
+    }
+
 
     public IEnumerator<Box> GetEnumerator() => this.Items.GetEnumerator();
 
