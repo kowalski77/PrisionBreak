@@ -57,5 +57,3 @@ public class BoxContainer : IReadOnlyList<Box>
         }
     }
 }
-
-public record Box(int Identifier, int Number);
