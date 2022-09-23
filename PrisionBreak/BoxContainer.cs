@@ -6,10 +6,11 @@ public class BoxContainer : IReadOnlyList<Box>
 {
     private readonly int[] numbers;
 
-    public BoxContainer(int total)
+    public BoxContainer(int total, int limit)
     {
-        this.numbers = Enumerable.Range(1, total).ToArray();
+        this.numbers = Enumerable.Range(1, total.NonNegativeOrZero()).ToArray();
         this.Items = new List<Box>(total);
+        this.Limit = limit.NonNegativeOrZero();
     }
 
     private List<Box> Items { get; }
@@ -17,6 +18,8 @@ public class BoxContainer : IReadOnlyList<Box>
     public int Count => this.Items.Count;
 
     public Box this[int index] => this.Items[index];
+
+    public int Limit { get; }
 
     public void Scramble()
     {
@@ -31,11 +34,18 @@ public class BoxContainer : IReadOnlyList<Box>
         }
     }
 
+    public bool CanFindPathBellowLimit(int identifier)
+    {
+        var path = this.FindPath(identifier.NonNegativeOrZero());
+
+        return path.Count <= this.Limit;
+    }
+
     public IReadOnlyList<Box> FindPath(int identifier)
     {
         var path = new List<Box>();
 
-        var box = this.Items.FirstOrDefault(x => x.Identifier == identifier) ?? 
+        var box = this.Items.FirstOrDefault(x => x.Identifier == identifier.NonNegativeOrZero()) ?? 
             throw new ArgumentException("Identifier not found", nameof(identifier));
         
         path.Add(box);

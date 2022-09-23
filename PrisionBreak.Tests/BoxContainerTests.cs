@@ -9,7 +9,7 @@ public class BoxContainerTests
     {
         // Arrange
         const int totalBoxes = 100;
-        var playground = new BoxContainer(totalBoxes);
+        var playground = new BoxContainer(totalBoxes, 50);
 
         // Act
         playground.Scramble();
@@ -28,7 +28,7 @@ public class BoxContainerTests
     public void The_path_leads_to_the_box_with_the_identifier(int totalBoxes, int boxIdentifier)
     {
         // Arrange
-        var playground = new BoxContainer(totalBoxes);
+        var playground = new BoxContainer(totalBoxes, totalBoxes / 2);
         playground.Scramble();
 
         // Act
@@ -38,5 +38,23 @@ public class BoxContainerTests
         path.Should().NotBeEmpty();
         path.Should().OnlyHaveUniqueItems();
         path[path.Count - 1].Number.Should().Be(boxIdentifier);
+    }
+
+    [Fact]
+    public void Find_path_bellow_limit_return_success_when_path_count_is_bellow_the_limit()
+    {
+        // Arrange
+        const int totalBoxes = 100;
+        const int identifier = 45;
+
+        var playground = new BoxContainer(totalBoxes, 50);
+        playground.Scramble();
+        var path = playground.FindPath(identifier);
+
+        // Act
+        var success = playground.CanFindPathBellowLimit(identifier);
+
+        // Arrange
+        success.Should().Be(path.Count <= playground.Limit);
     }
 }
