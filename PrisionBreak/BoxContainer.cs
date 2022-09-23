@@ -18,7 +18,7 @@ public class BoxContainer : IScrumbled<Box>
 
     public Box this[int index] => this.Items[index];
 
-    public bool IsSuccess() => this.CheckPaths().Count(x => x) == 100;
+    public bool ScenarioSuccess() => this.CheckPaths().Count(x => x) == 100;
 
     public IEnumerator<Box> GetEnumerator() => this.Items.GetEnumerator();
 
@@ -28,20 +28,20 @@ public class BoxContainer : IScrumbled<Box>
     {
         var random = new Random();
         var numbers = this.Items.Select(x => x.Number);
-        var scrambled = GetBoxes(numbers.OrderBy(x => random.Next()));
+        var scrambled = CreateBoxes(numbers.OrderBy(x => random.Next()));
 
         return new BoxContainer(scrambled);
     }
 
     public IReadOnlyList<Box> GetPath(int identifier)
     {
-        var firstBox = this.Items.FirstOrDefault(x => x.Identifier == identifier.NonNegativeOrZero()) ??
+        var box = this.Items.FirstOrDefault(x => x.Identifier == identifier.NonNegativeOrZero()) ??
             throw new ArgumentException("Identifier not found", nameof(identifier));
 
-        return GetPathInternal(firstBox, identifier).ToList();
+        return FindPath(box, identifier).ToList();
     }
 
-    private IEnumerable<Box> GetPathInternal(Box box, int identifier)
+    private IEnumerable<Box> FindPath(Box box, int identifier)
     {
         yield return box;
 
@@ -61,7 +61,7 @@ public class BoxContainer : IScrumbled<Box>
         }
     }
 
-    private static IEnumerable<Box> GetBoxes(IEnumerable<int> numbers)
+    private static IEnumerable<Box> CreateBoxes(IEnumerable<int> numbers)
     {
         var boxNumber = 1;
         foreach (var item in numbers)

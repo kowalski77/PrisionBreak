@@ -6,5 +6,5 @@ public interface IScrumbled<out T> : IReadOnlyList<T>
 
     IReadOnlyList<T> GetPath(int identifier);
 
-    bool IsSuccess();
+    bool ScenarioSuccess();
 }

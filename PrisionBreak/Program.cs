@@ -7,6 +7,6 @@ var prisoners = 100;
 var success = Enumerable.Range(1, prisoners)
     .ToBoxContainer()
     .Scrumble()
-    .IsSuccess();
+    .ScenarioSuccess();
 
 Console.WriteLine($"Success: {success}");
