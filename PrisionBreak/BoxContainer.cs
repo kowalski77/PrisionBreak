@@ -36,7 +36,7 @@ public class BoxContainer : IReadOnlyList<Box>
         var path = new List<Box>();
 
         var box = this.Items.FirstOrDefault(x => x.Identifier == identifier) ?? 
-            throw new ArgumentException("Identifier not found, Scramble the boxes first", nameof(identifier));
+            throw new ArgumentException("Identifier not found", nameof(identifier));
         
         path.Add(box);
         

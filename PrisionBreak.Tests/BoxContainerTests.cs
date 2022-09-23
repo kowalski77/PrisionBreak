@@ -20,12 +20,14 @@ public class BoxContainerTests
         playground.Should().OnlyContain(x => x.Number >= 1 && x.Number <= totalBoxes);
     }
 
-    [Fact]
-    public void The_path_leads_to_the_box_with_the_identifier()
+    [Theory]
+    [InlineData(100, 3)]
+    [InlineData(100, 57)]
+    [InlineData(500, 234)]
+    [InlineData(1000, 785)]
+    public void The_path_leads_to_the_box_with_the_identifier(int totalBoxes, int boxIdentifier)
     {
         // Arrange
-        const int totalBoxes = 100;
-        const int boxIdentifier = 32;
         var playground = new BoxContainer(totalBoxes);
         playground.Scramble();
 
