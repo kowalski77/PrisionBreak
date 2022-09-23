@@ -6,11 +6,11 @@ public class BoxContainer : IReadOnlyList<Box>
 {
     private readonly int[] numbers;
 
-    public BoxContainer(int total, int limit)
+    public BoxContainer(IEnumerable<int> sequence)
     {
-        this.numbers = Enumerable.Range(1, total.NonNegativeOrZero()).ToArray();
-        this.Items = new List<Box>(total);
-        this.Limit = limit.NonNegativeOrZero();
+        this.numbers = sequence.ToArray();
+        this.Items = new List<Box>(numbers.Length);
+        this.Limit = numbers.Length / 2;
         this.Scramble();
     }
 

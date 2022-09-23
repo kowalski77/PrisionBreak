@@ -1,9 +1,8 @@
-﻿using PrisionBreak;
-
-Console.WriteLine("Prision Break");
+﻿Console.WriteLine("Prision Break");
 
 var prisoners = 100;
-var boxContainer = new BoxContainer(prisoners, 50);
+
+var boxContainer = Enumerable.Range(1, prisoners).ToBoxContainer();
 
 var success = boxContainer.CheckPaths().IsSuccess();
 

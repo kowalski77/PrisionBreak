@@ -11,7 +11,7 @@ public class BoxContainerTests
         const int totalBoxes = 100;
 
         // Act
-        var playground = new BoxContainer(totalBoxes, 50);
+        var playground = new BoxContainer(Enumerable.Range(1, totalBoxes));
 
         // Assert
         playground.Count.Should().Be(totalBoxes);
@@ -28,7 +28,7 @@ public class BoxContainerTests
     public void The_path_leads_to_the_box_with_the_identifier(int totalBoxes, int boxIdentifier)
     {
         // Arrange
-        var playground = new BoxContainer(totalBoxes, totalBoxes / 2);
+        var playground = new BoxContainer(Enumerable.Range(1, totalBoxes));
 
         // Act
         var path = playground.FindPath(boxIdentifier);
