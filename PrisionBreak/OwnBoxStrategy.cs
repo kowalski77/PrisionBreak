@@ -1,6 +1,6 @@
 ﻿namespace PrisionBreak;
 
-public class LoopBoxStrategy : IFindStrategy
+public class OwnBoxStrategy : IFindStrategy
 {
     public IReadOnlyList<Box> FindPath(IEnumerable<Box> boxCollection, int identifier) =>
         FindLoop(boxCollection.NonNull(), identifier.NonNegativeOrZero()).ToList();

@@ -13,8 +13,8 @@ ExecuteScenario(randomScenario, replay);
 
 Console.WriteLine();
 Console.WriteLine("Loop strategy");
-var loopScenario = Enumerable.Range(1, prisoners).ToScrumbledWithLoopStrategy();
-ExecuteScenario(loopScenario, replay);
+var ownBoxScenario = Enumerable.Range(1, prisoners).ToScrumbledWithOwnBoxStrategy();
+ExecuteScenario(ownBoxScenario, replay);
 
 void ExecuteScenario(IScrumbled<Box> boxContainer, int replay)
 {
