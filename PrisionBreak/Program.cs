@@ -2,15 +2,13 @@
 
 Console.WriteLine("Prision Break");
 
-var resultsLock = new object();
 var results = new List<bool>();
-
 var boxContainer = Enumerable.Range(1, 100).ToScrumbled();
 
-Parallel.For(0, 1000, (_) =>
+Parallel.For(0, 100, (_) =>
 {
     var result = boxContainer.Scrumble().IsScenarioSuccess();
-    lock (resultsLock)
+    lock (results)
     {
         results.Add(result);
     }
