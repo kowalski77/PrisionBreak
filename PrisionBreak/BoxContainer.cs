@@ -22,19 +22,11 @@ public class BoxContainer : IScrumbled<Box>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public IScrumbled<Box> Scrumble()
-    {
-        var random = new Random();
-        var numbers = this.Items.Select(x => x.Number);
-        var scrambled = CreateBoxes(numbers.OrderBy(x => random.Next()));
+    public IScrumbled<Box> Scrumble() => 
+        new BoxContainer(CreateBoxes(this.Items.Select(x => x.Number).OrderBy(x => new Random().Next())), this.findStategy);
 
-        return new BoxContainer(scrambled, this.findStategy);
-    }
-
-    public IReadOnlyList<Box> GetPath(int identifier)
-    {
-        return this.findStategy.FindPath(this.Items, identifier.NonNegativeOrZero());
-    }
+    public IReadOnlyList<Box> GetPath(int identifier) => 
+        this.findStategy.FindPath(this.Items, identifier.NonNegativeOrZero());
 
     private static IEnumerable<Box> CreateBoxes(IEnumerable<int> numbers)
     {
