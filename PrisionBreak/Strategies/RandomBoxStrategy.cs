@@ -1,6 +1,6 @@
 ﻿namespace PrisionBreak.Strategies;
 
-public class RandomBoxStrategy : BaseStrategy
+public class RandomBoxStrategy : BaseStrategy<Box>
 {
     protected override IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier)
     {

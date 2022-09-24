@@ -1,7 +1,7 @@
 ﻿namespace PrisionBreak.Strategies;
 
 
-public interface IFindStrategy
+public interface IFindStrategy<T>
 {
-    IReadOnlyList<Box> FindPath(IEnumerable<Box> boxCollection, int identifier);
+    IReadOnlyList<T> FindPath(IEnumerable<T> collection, int identifier);
 }

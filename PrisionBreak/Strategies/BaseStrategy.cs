@@ -1,10 +1,10 @@
 ﻿namespace PrisionBreak.Strategies;
 
-public abstract class BaseStrategy : IFindStrategy
+public abstract class BaseStrategy<T> : IFindStrategy<T>
 {
-    public IReadOnlyList<Box> FindPath(IEnumerable<Box> boxCollection, int identifier) => 
-        this.FindLoop(boxCollection.NonNull(), identifier.NonNegativeOrZero())
+    public IReadOnlyList<T> FindPath(IEnumerable<T> collection, int identifier) => 
+        this.FindLoop(collection.NonNull(), identifier.NonNegativeOrZero())
         .ToList();
 
-    protected abstract IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier);
+    protected abstract IEnumerable<T> FindLoop(IEnumerable<T> boxCollection, int targetIdentifier);
 }

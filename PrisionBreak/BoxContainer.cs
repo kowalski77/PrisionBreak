@@ -5,9 +5,9 @@ namespace PrisionBreak;
 
 public class BoxContainer : IScrumbled<Box>
 {
-    private readonly IFindStrategy findStategy;
+    private readonly IFindStrategy<Box> findStategy;
 
-    public BoxContainer(IEnumerable<Box> sequence, IFindStrategy findStategy)
+    public BoxContainer(IEnumerable<Box> sequence, IFindStrategy<Box> findStategy)
     {
         this.Items = new List<Box>(sequence.NonNull());
         this.findStategy = findStategy.NonNull();
