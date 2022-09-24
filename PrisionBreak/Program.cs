@@ -3,12 +3,12 @@
 Console.WriteLine("Prision Break");
 
 Console.WriteLine("Random strategy");
-var randomScenario = Enumerable.Range(1, 100).ToScrumbled(FindStrategy.Random);
-ExecuteScenario(randomScenario);
+var loopScenario = Enumerable.Range(1, 100).ToScrumbled();
+ExecuteScenario(loopScenario);
 
 Console.WriteLine("Loop strategy");
-var loopScenario = Enumerable.Range(1, 100).ToScrumbled(FindStrategy.Loop);
-ExecuteScenario(loopScenario);
+var randomScenario = Enumerable.Range(1, 100).ToScrumbledWithLoopStrategy();
+ExecuteScenario(randomScenario);
 
 static void ExecuteScenario(IScrumbled<Box> boxContainer)
 {
