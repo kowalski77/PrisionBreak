@@ -1,4 +1,6 @@
-﻿namespace PrisionBreak;
+﻿using PrisionBreak.Strategies;
+
+namespace PrisionBreak;
 
 public static class Operators
 {

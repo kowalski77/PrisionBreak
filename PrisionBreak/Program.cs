@@ -12,7 +12,7 @@ var randomScenario = Enumerable.Range(1, prisoners).ToScrumbled();
 ExecuteScenario(randomScenario, replay);
 
 Console.WriteLine();
-Console.WriteLine("Loop strategy");
+Console.WriteLine("Own box strategy");
 var ownBoxScenario = Enumerable.Range(1, prisoners).ToScrumbledWithOwnBoxStrategy();
 ExecuteScenario(ownBoxScenario, replay);
 

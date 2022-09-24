@@ -1,11 +1,8 @@
-﻿namespace PrisionBreak;
+﻿namespace PrisionBreak.Strategies;
 
-public class RandomBoxStrategy : IFindStrategy
+public class RandomBoxStrategy : BaseStrategy
 {
-    public IReadOnlyList<Box> FindPath(IEnumerable<Box> boxCollection, int identifier) =>
-        FindLoop(boxCollection.NonNull(), identifier.NonNegativeOrZero()).ToList();
-
-    private static IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier)
+    protected override IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier)
     {
         var identifiers = boxCollection.Select(x => x.Identifier).OrderBy(x => new Random().Next());
 

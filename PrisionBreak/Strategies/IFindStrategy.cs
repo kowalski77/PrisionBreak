@@ -1,4 +1,4 @@
-﻿namespace PrisionBreak;
+﻿namespace PrisionBreak.Strategies;
 
 
 public interface IFindStrategy
