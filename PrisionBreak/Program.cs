@@ -8,13 +8,13 @@ const int replay = 1000;
 
 Console.WriteLine();
 Console.WriteLine("Random strategy");
-var loopScenario = Enumerable.Range(1, prisoners).ToScrumbled();
-ExecuteScenario(loopScenario, replay);
+var randomScenario = Enumerable.Range(1, prisoners).ToScrumbled();
+ExecuteScenario(randomScenario, replay);
 
 Console.WriteLine();
 Console.WriteLine("Loop strategy");
-var randomScenario = Enumerable.Range(1, prisoners).ToScrumbledWithLoopStrategy();
-ExecuteScenario(randomScenario, replay);
+var loopScenario = Enumerable.Range(1, prisoners).ToScrumbledWithLoopStrategy();
+ExecuteScenario(loopScenario, replay);
 
 void ExecuteScenario(IScrumbled<Box> boxContainer, int replay)
 {
