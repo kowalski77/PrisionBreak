@@ -3,7 +3,8 @@
 public abstract class BaseStrategy : IFindStrategy
 {
     public IReadOnlyList<Box> FindPath(IEnumerable<Box> boxCollection, int identifier) => 
-        FindLoop(boxCollection.NonNull(), identifier.NonNegativeOrZero()).ToList();
+        this.FindLoop(boxCollection.NonNull(), identifier.NonNegativeOrZero())
+        .ToList();
 
     protected abstract IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier);
 }
