@@ -10,7 +10,7 @@ public static class Operators
     public static IScrumbled<Box> ToScrumbledWithOwnBoxStrategy(this IEnumerable<int> sequence) =>
         new BoxContainer(sequence.Select(x => new Box(x, x)), new OwnBoxStrategy());
 
-    public static bool IsScenarioSuccess(this IScrumbled<Box> scrumbled, int limit) => 
+    public static bool IsScenarioSuccess(this IScrumbled<Box> scrumbled, int limit) =>
         scrumbled.CheckPaths(limit.NonNegativeOrZero()).All(x => x);
 
     private static IEnumerable<bool> CheckPaths(this IScrumbled<Box> scrumbled, int limit)
