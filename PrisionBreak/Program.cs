@@ -1,18 +1,22 @@
 ﻿using PrisionBreak;
 
-Console.WriteLine("Prision Break");
+Console.WriteLine("--Prision Break--");
 
+const int prisoners = 100;
+const int replay = 1000;
+
+Console.WriteLine();
 Console.WriteLine("Random strategy");
-var loopScenario = Enumerable.Range(1, 100).ToScrumbled();
-ExecuteScenario(loopScenario);
+var loopScenario = Enumerable.Range(1, prisoners).ToScrumbled();
+ExecuteScenario(loopScenario, replay);
 
+Console.WriteLine();
 Console.WriteLine("Loop strategy");
-var randomScenario = Enumerable.Range(1, 100).ToScrumbledWithLoopStrategy();
-ExecuteScenario(randomScenario);
+var randomScenario = Enumerable.Range(1, prisoners).ToScrumbledWithLoopStrategy();
+ExecuteScenario(randomScenario, replay);
 
-static void ExecuteScenario(IScrumbled<Box> boxContainer)
+static void ExecuteScenario(IScrumbled<Box> boxContainer, int replay)
 {
-    const int replay = 1000;
     var results = new List<bool>();
     Parallel.For(0, replay, (_) =>
     {
