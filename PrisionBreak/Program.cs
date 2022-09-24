@@ -24,7 +24,7 @@ static void ExecuteScenario(IScrumbled<Box> boxContainer)
 
     var success = results.Count(x => x);
     var failures = results.Count(x => !x);
-    var ratio = (double)success / failures * 100;
+    var ratio = (double)success / 10;
 
     Console.WriteLine($"Success: {success}, Failures: {failures}, Ratio: {Math.Round(ratio, 2)} %");
 }
