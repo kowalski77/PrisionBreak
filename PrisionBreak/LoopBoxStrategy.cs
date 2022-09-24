@@ -3,7 +3,7 @@
 public class LoopBoxStrategy : IFindStrategy
 {
     public IReadOnlyList<Box> FindPath(IEnumerable<Box> boxCollection, int identifier) =>
-        FindLoop(boxCollection, identifier).ToList();
+        FindLoop(boxCollection.NonNull(), identifier.NonNegativeOrZero()).ToList();
 
     private static IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier)
     {
