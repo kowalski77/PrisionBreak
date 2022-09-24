@@ -9,8 +9,7 @@ public class RandomBoxStrategy : IFindStrategy
 
     private static IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier)
     {
-        var random = new Random();
-        var identifiers = boxCollection.Select(x => x.Identifier).OrderBy(x => random.Next());
+        var identifiers = boxCollection.Select(x => x.Identifier).OrderBy(x => new Random().Next());
 
         foreach (var identifier in identifiers)
         {
