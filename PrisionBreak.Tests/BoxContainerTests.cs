@@ -11,10 +11,10 @@ public class BoxContainerTests
         const int prisioners = 100;
 
         // Act
-        var boxContainer = Enumerable.Range(1, prisioners).ToScrumbled();
+        var boxContainer = Enumerable.Range(1, prisioners).ToScrumbled(FindStrategy.Own);
 
         // Assert
-        boxContainer.Count.Should().Be(prisioners);
+        boxContainer.Count().Should().Be(prisioners);
         boxContainer.Should().OnlyHaveUniqueItems();
         boxContainer.Should().OnlyContain(x => x.Identifier >= 1 && x.Identifier <= prisioners);
         boxContainer.Should().OnlyContain(x => x.Number >= 1 && x.Number <= prisioners);
@@ -28,7 +28,7 @@ public class BoxContainerTests
     public void The_path_leads_to_the_box_with_the_identifier(int prisioners, int boxIdentifier)
     {
         // Arrange
-        var boxContainer = Enumerable.Range(1, prisioners).ToScrumbled();
+        var boxContainer = Enumerable.Range(1, prisioners).ToScrumbled(FindStrategy.Own);
 
         // Act
         var path = boxContainer.GetPath(boxIdentifier);

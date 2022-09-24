@@ -3,7 +3,7 @@
 Console.WriteLine("Prision Break");
 
 var results = new List<bool>();
-var boxContainer = Enumerable.Range(1, 100).ToScrumbled();
+var boxContainer = Enumerable.Range(1, 100).ToScrumbled(FindStrategy.Own);
 
 Parallel.For(0, 100, (_) =>
 {

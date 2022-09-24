@@ -4,10 +4,15 @@ namespace PrisionBreak;
 
 public class BoxContainer : IScrumbled<Box>
 {
-    public BoxContainer(IEnumerable<Box> sequence)
+    private readonly IFindStrategy findStategy;
+
+    public BoxContainer(IEnumerable<Box> sequence, IFindStrategy findStategy)
     {
         ArgumentNullException.ThrowIfNull(sequence);
+        ArgumentNullException.ThrowIfNull(findStategy);
+        
         this.Items = new List<Box>(sequence);
+        this.findStategy = findStategy;
     }
 
     private List<Box> Items { get; }
@@ -26,26 +31,12 @@ public class BoxContainer : IScrumbled<Box>
         var numbers = this.Items.Select(x => x.Number);
         var scrambled = CreateBoxes(numbers.OrderBy(x => random.Next()));
 
-        return new BoxContainer(scrambled);
+        return new BoxContainer(scrambled, this.findStategy);
     }
 
     public IReadOnlyList<Box> GetPath(int identifier)
     {
-        var box = this.Items.FirstOrDefault(x => x.Identifier == identifier.NonNegativeOrZero()) ??
-            throw new ArgumentException("Identifier not found", nameof(identifier));
-
-        return FindLoop(box, identifier).ToList();
-    }
-
-    private IEnumerable<Box> FindLoop(Box box, int identifier)
-    {
-        yield return box;
-
-        while (box.Number != identifier)
-        {
-            box = this.Items.First(x => x.Identifier == box.Number);
-            yield return box;
-        }
+        return this.findStategy.FindPath(this.Items, identifier);
     }
 
     private IEnumerable<bool> CheckPaths()
