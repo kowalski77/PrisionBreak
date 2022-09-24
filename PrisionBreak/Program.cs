@@ -12,8 +12,9 @@ ExecuteScenario(randomScenario);
 
 static void ExecuteScenario(IScrumbled<Box> boxContainer)
 {
+    const int replay = 1000;
     var results = new List<bool>();
-    Parallel.For(0, 1000, (_) =>
+    Parallel.For(0, replay, (_) =>
     {
         var result = boxContainer.Scrumble().IsScenarioSuccess();
         lock (results)
@@ -24,7 +25,7 @@ static void ExecuteScenario(IScrumbled<Box> boxContainer)
 
     var success = results.Count(x => x);
     var failures = results.Count(x => !x);
-    var ratio = (double)success / 10;
+    var ratio = (double)success / replay * 100;
 
     Console.WriteLine($"Success: {success}, Failures: {failures}, Ratio: {Math.Round(ratio, 2)} %");
 }
