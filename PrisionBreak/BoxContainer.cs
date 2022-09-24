@@ -8,11 +8,8 @@ public class BoxContainer : IScrumbled<Box>
 
     public BoxContainer(IEnumerable<Box> sequence, IFindStrategy findStategy)
     {
-        ArgumentNullException.ThrowIfNull(sequence);
-        ArgumentNullException.ThrowIfNull(findStategy);
-        
-        this.Items = new List<Box>(sequence);
-        this.findStategy = findStategy;
+        this.Items = new List<Box>(sequence.NonNull());
+        this.findStategy = findStategy.NonNull();
     }
 
     private List<Box> Items { get; }
@@ -36,7 +33,7 @@ public class BoxContainer : IScrumbled<Box>
 
     public IReadOnlyList<Box> GetPath(int identifier)
     {
-        return this.findStategy.FindPath(this.Items, identifier);
+        return this.findStategy.FindPath(this.Items, identifier.NonNegativeOrZero());
     }
 
     private static IEnumerable<Box> CreateBoxes(IEnumerable<int> numbers)
