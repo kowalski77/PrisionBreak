@@ -8,8 +8,8 @@ const int replay = 1000;
 
 Console.WriteLine();
 Console.WriteLine("Random strategy");
-var randomScenario = Enumerable.Range(1, prisoners).ToScrumbled();
-ExecuteScenario(randomScenario, replay);
+var randomBoxScenario = Enumerable.Range(1, prisoners).ToScrumbled();
+ExecuteScenario(randomBoxScenario, replay);
 
 Console.WriteLine();
 Console.WriteLine("Own box strategy");
