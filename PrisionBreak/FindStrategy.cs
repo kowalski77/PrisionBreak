@@ -2,7 +2,7 @@
 
 public static class FindStrategy
 {
-    public static IFindStrategy Own => new OwnBoxStrategy();
+    public static IFindStrategy Loop => new LoopBoxStrategy();
 
     public static IFindStrategy Random => new RandomBoxStrategy();
 }
