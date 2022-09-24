@@ -4,7 +4,7 @@ public class RandomBoxStrategy : IFindStrategy
 {
     public IReadOnlyList<Box> FindPath(IEnumerable<Box> boxCollection, int identifier)
     {
-        return FindLoop(boxCollection, identifier).ToList();
+        return FindLoop(boxCollection.NonNull(), identifier.NonNegativeOrZero()).ToList();
     }
 
     private static IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier)

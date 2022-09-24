@@ -4,7 +4,7 @@ public class LoopBoxStrategy : IFindStrategy
 {
     public IReadOnlyList<Box> FindPath(IEnumerable<Box> boxCollection, int identifier)
     {
-        var box = boxCollection.First(x => x.Identifier == identifier.NonNegativeOrZero());
+        var box = boxCollection.NonNull().First(x => x.Identifier == identifier.NonNegativeOrZero());
 
         return FindLoop(boxCollection, box, identifier).ToList();
     }
