@@ -11,7 +11,7 @@ public class BoxContainerTests
         const int prisioners = 100;
 
         // Act
-        var boxContainer = Enumerable.Range(1, prisioners).ToScrumbled();
+        var boxContainer = Enumerable.Range(1, prisioners).ToScrumbledWithLoopStrategy().Scrumble();
 
         // Assert
         boxContainer.Count().Should().Be(prisioners);
@@ -28,7 +28,7 @@ public class BoxContainerTests
     public void The_path_leads_to_the_box_with_the_identifier(int prisioners, int boxIdentifier)
     {
         // Arrange
-        var boxContainer = Enumerable.Range(1, prisioners).ToScrumbled();
+        var boxContainer = Enumerable.Range(1, prisioners).ToScrumbledWithLoopStrategy().Scrumble();
 
         // Act
         var path = boxContainer.GetPath(boxIdentifier);
