@@ -2,7 +2,7 @@
 
 public class RandomBoxStrategy : BaseStrategy<Box>
 {
-    protected override IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier)
+    protected override IEnumerable<Box> FindPathConcrete(IEnumerable<Box> boxCollection, int targetIdentifier)
     {
         var identifiers = boxCollection.Select(x => x.Identifier).OrderBy(x => new Random().Next());
 

@@ -2,7 +2,7 @@
 
 public class OwnBoxStrategy : BaseStrategy<Box>
 {
-    protected override IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, int targetIdentifier)
+    protected override IEnumerable<Box> FindPathConcrete(IEnumerable<Box> boxCollection, int targetIdentifier)
     {
         var box = boxCollection.NonNull().First(x => x.Identifier == targetIdentifier);
         yield return box;
