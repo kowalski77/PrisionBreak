@@ -2,8 +2,8 @@
 
 public static class Operators
 {
-    public static IScrumbled<Box> ToScrumbled(this IEnumerable<int> sequence) => 
-        new BoxContainer(sequence.Select(x=> new Box(x, x)), new RandomBoxStrategy());
+    public static IScrumbled<Box> ToScrumbled(this IEnumerable<int> sequence) =>
+        new BoxContainer(sequence.Select(x => new Box(x, x)), new RandomBoxStrategy());
 
     public static IScrumbled<Box> ToScrumbledWithLoopStrategy(this IEnumerable<int> sequence) =>
         new BoxContainer(sequence.Select(x => new Box(x, x)), new LoopBoxStrategy());
@@ -14,8 +14,7 @@ public static class Operators
     {
         for (var i = 1; i <= scrumbled.NonNull().Count; i++)
         {
-            var path = scrumbled.GetPath(i);
-            yield return path.Count <= limit;
+            yield return scrumbled.GetPath(i).Count <= limit;
         }
     }
 }
