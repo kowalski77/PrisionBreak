@@ -16,10 +16,10 @@ public class BoxContainer : IScrumbled<Box>
     }
 
     private List<Box> Items { get; }
+    
+    public int Count => this.Items.Count;
 
-    public int Limit => Items.Count / 2;
-
-    public bool IsScenarioSuccess() => this.CheckPaths().Count(x => x) == this.Items.Count;
+    public Box this[int index] => this.Items[index];
 
     public IEnumerator<Box> GetEnumerator() => this.Items.GetEnumerator();
 
@@ -37,15 +37,6 @@ public class BoxContainer : IScrumbled<Box>
     public IReadOnlyList<Box> GetPath(int identifier)
     {
         return this.findStategy.FindPath(this.Items, identifier);
-    }
-
-    private IEnumerable<bool> CheckPaths()
-    {
-        for (var i = 1; i <= this.Items.Count; i++)
-        {
-            var path = this.GetPath(i);
-            yield return path.Count <= this.Limit;
-        }
     }
 
     private static IEnumerable<Box> CreateBoxes(IEnumerable<int> numbers)

@@ -7,4 +7,15 @@ public static class Operators
 
     public static IScrumbled<Box> ToScrumbledWithLoopStrategy(this IEnumerable<int> sequence) =>
         new BoxContainer(sequence.Select(x => new Box(x, x)), new LoopBoxStrategy());
+
+    public static bool IsScenarioSuccess(this IScrumbled<Box> boxes, int limit) => boxes.CheckPaths(limit.NonNegativeOrZero()).All(x => x);
+
+    private static IEnumerable<bool> CheckPaths(this IScrumbled<Box> scrumbled, int limit)
+    {
+        for (var i = 1; i <= scrumbled.NonNull().Count; i++)
+        {
+            var path = scrumbled.GetPath(i);
+            yield return path.Count <= limit;
+        }
+    }
 }
