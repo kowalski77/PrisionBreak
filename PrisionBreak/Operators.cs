@@ -2,5 +2,6 @@
 
 public static class Operators
 {
-    public static BoxContainer ToBoxContainer(this IEnumerable<int> sequence) => new(sequence.Select(x=> new Box(x, x)));
+    public static IScrumbled<Box> ToScrumbled(this IEnumerable<int> sequence) => 
+        new BoxContainer(sequence.Select(x=> new Box(x, x)));
 }

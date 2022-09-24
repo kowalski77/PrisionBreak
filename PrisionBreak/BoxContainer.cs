@@ -14,11 +14,7 @@ public class BoxContainer : IScrumbled<Box>
 
     public int Limit => Items.Count / 2;
 
-    public int Count => this.Items.Count;
-
-    public Box this[int index] => this.Items[index];
-
-    public bool ScenarioSuccess() => this.CheckPaths().Count(x => x) == 100;
+    public bool IsScenarioSuccess() => this.CheckPaths().Count(x => x) == 100;
 
     public IEnumerator<Box> GetEnumerator() => this.Items.GetEnumerator();
 
@@ -38,10 +34,10 @@ public class BoxContainer : IScrumbled<Box>
         var box = this.Items.FirstOrDefault(x => x.Identifier == identifier.NonNegativeOrZero()) ??
             throw new ArgumentException("Identifier not found", nameof(identifier));
 
-        return FindPath(box, identifier).ToList();
+        return FindLoop(box, identifier).ToList();
     }
 
-    private IEnumerable<Box> FindPath(Box box, int identifier)
+    private IEnumerable<Box> FindLoop(Box box, int identifier)
     {
         yield return box;
 
