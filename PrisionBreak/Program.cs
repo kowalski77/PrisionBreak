@@ -2,21 +2,27 @@
 
 Console.WriteLine("Prision Break");
 
-var results = new List<bool>();
-var boxContainer = Enumerable.Range(1, 100).ToScrumbled(FindStrategy.Own);
+var firstScenario = Enumerable.Range(1, 100).ToScrumbled(FindStrategy.Random);
+ExecuteScenario(firstScenario);
 
-Parallel.For(0, 100, (_) =>
+var secondScenario = Enumerable.Range(1, 100).ToScrumbled(FindStrategy.Own);
+ExecuteScenario(secondScenario);
+
+static void ExecuteScenario(IScrumbled<Box> boxContainer)
 {
-    var result = boxContainer.Scrumble().IsScenarioSuccess();
-    lock (results)
+    var results = new List<bool>();
+    Parallel.For(0, 1000, (_) =>
     {
-        results.Add(result);
-    }
-});
+        var result = boxContainer.Scrumble().IsScenarioSuccess();
+        lock (results)
+        {
+            results.Add(result);
+        }
+    });
 
-var success = results.Count(x => x);
-var failures = results.Count(x => !x);
+    var success = results.Count(x => x);
+    var failures = results.Count(x => !x);
+    var ratio = (double)success / failures * 100;
 
-var ratio = (double)success / failures * 100;
-
-Console.WriteLine($"Success ratio: {ratio} %");
+    Console.WriteLine($"Success: {success}, Failures: {failures}, Ratio: {ratio} %");
+}

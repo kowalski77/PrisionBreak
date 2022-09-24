@@ -4,17 +4,16 @@ public class OwnBoxStrategy : IFindStrategy
 {
     public IReadOnlyList<Box> FindPath(IEnumerable<Box> boxCollection, int identifier)
     {
-        var box = boxCollection.FirstOrDefault(x => x.Identifier == identifier.NonNegativeOrZero()) ??
-            throw new ArgumentException("Identifier not found", nameof(identifier));
+        var box = boxCollection.First(x => x.Identifier == identifier.NonNegativeOrZero());
 
         return FindLoop(boxCollection, box, identifier).ToList();
     }
 
-    private static IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, Box box, int identifier)
+    private static IEnumerable<Box> FindLoop(IEnumerable<Box> boxCollection, Box box, int targetIdentifier)
     {
         yield return box;
 
-        while (box.Number != identifier)
+        while (box.Number != targetIdentifier)
         {
             box = boxCollection.First(x => x.Identifier == box.Number);
             yield return box;

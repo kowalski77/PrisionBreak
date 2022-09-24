@@ -19,7 +19,7 @@ public class BoxContainer : IScrumbled<Box>
 
     public int Limit => Items.Count / 2;
 
-    public bool IsScenarioSuccess() => this.CheckPaths().Count(x => x) == 100;
+    public bool IsScenarioSuccess() => this.CheckPaths().Count(x => x) == this.Items.Count;
 
     public IEnumerator<Box> GetEnumerator() => this.Items.GetEnumerator();
 

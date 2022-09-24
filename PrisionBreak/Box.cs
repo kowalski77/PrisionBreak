@@ -1,3 +1,3 @@
 ﻿namespace PrisionBreak;
 
-public record Box(int Identifier, int Number);
+public readonly record struct Box(int Identifier, int Number);
