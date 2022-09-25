@@ -14,7 +14,7 @@ public class BoxContainerTests
         var boxContainer = Enumerable.Range(1, prisioners).ToScrumbledWithOwnBoxStrategy().Scrumble();
 
         // Assert
-        boxContainer.Count().Should().Be(prisioners);
+        boxContainer.Count.Should().Be(prisioners);
         boxContainer.Should().OnlyHaveUniqueItems();
         boxContainer.Should().OnlyContain(x => x.Identifier >= 1 && x.Identifier <= prisioners);
         boxContainer.Should().OnlyContain(x => x.Number >= 1 && x.Number <= prisioners);

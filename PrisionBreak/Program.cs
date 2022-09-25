@@ -3,7 +3,7 @@
 Console.WriteLine("--Prision Break--");
 
 const int prisoners = 100;
-const int replay = 1000;
+const int replay = 10_000;
 var limit = prisoners / 2;
 
 Console.WriteLine();

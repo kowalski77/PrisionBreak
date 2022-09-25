@@ -9,19 +9,17 @@ public class BoxContainer : IScrumbled<Box>
 
     public BoxContainer(IEnumerable<Box> sequence, IFindStrategy<Box> findStategy)
     {
-        this.Items = new List<Box>(sequence.NonNull());
+        this.Items = sequence.NonNull().ToArray();
         this.findStategy = findStategy.NonNull();
     }
 
-    private List<Box> Items { get; }
-    
-    public int Count => this.Items.Count;
+    private Box[] Items { get; }
 
-    public Box this[int index] => this.Items[index];
+    public int Count => this.Items.Length;
 
-    public IEnumerator<Box> GetEnumerator() => this.Items.GetEnumerator();
+    public IEnumerator<Box> GetEnumerator() => this.Items.AsEnumerable().GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
     public IScrumbled<Box> Scrumble() => 
         new BoxContainer(CreateBoxes(this.Items.Select(x => x.Number).OrderBy(x => new Random().Next())), this.findStategy);
