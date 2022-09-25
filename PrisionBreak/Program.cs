@@ -3,8 +3,8 @@
 Console.WriteLine("--Prision Break--");
 
 const int prisoners = 100;
-var limit = prisoners / 2;
 const int replay = 1000;
+var limit = prisoners / 2;
 
 Console.WriteLine();
 Console.WriteLine("Random strategy");
@@ -21,7 +21,7 @@ void ExecuteScenario(IScrumbled<Box> boxContainer, int replay)
     var results = new List<bool>();
     Parallel.For(0, replay, (_) =>
     {
-        var result = boxContainer.Scrumble().IsScenarioSuccess(limit);
+        var result = boxContainer.Scrumble().RunAll().Success(limit);
         lock (results)
         {
             results.Add(result);

@@ -10,14 +10,14 @@ public static class Operators
     public static IScrumbled<Box> ToScrumbledWithOwnBoxStrategy(this IEnumerable<int> sequence) =>
         new BoxContainer(sequence.Select(x => new Box(x, x)), new OwnBoxStrategy());
 
-    public static bool IsScenarioSuccess(this IScrumbled<Box> scrumbled, int limit) =>
-        scrumbled.CheckPaths(limit.NonNegativeOrZero()).All(x => x);
-
-    private static IEnumerable<bool> CheckPaths(this IScrumbled<Box> scrumbled, int limit)
+    public static IEnumerable<IReadOnlyList<Box>> RunAll(this IScrumbled<Box> scrumbled)
     {
         for (var i = 1; i <= scrumbled.NonNull().Count; i++)
         {
-            yield return scrumbled.GetPath(i).Count <= limit;
+            yield return scrumbled.GetPath(i);
         }
     }
+
+    public static bool Success(this IEnumerable<IReadOnlyList<Box>> results, int limit) => 
+        results.All(x => x.Count <= limit);
 }
