@@ -4,13 +4,12 @@ public class RandomBoxStrategy : BaseStrategy<Box>
 {
     protected override IEnumerable<Box> FindPathConcrete(IEnumerable<Box> boxCollection, int targetIdentifier)
     {
-        var hashSet = boxCollection.ToHashSet(new BoxIdentifierEqualityComparer());
-        
-        var identifiers = boxCollection.Select(x => x.Identifier).OrderBy(x => new Random().Next());
+        var dictionary = boxCollection.ToDictionary(x => x.Identifier);
+        var identifiers = dictionary.Keys.OrderBy(x=> new Random().Next());
 
         foreach (var identifier in identifiers)
         {
-            var box = hashSet.GetValue(identifier);
+            var box = dictionary[identifier];
             yield return box;
 
             if (box.Number == targetIdentifier)

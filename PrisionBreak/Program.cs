@@ -1,4 +1,5 @@
-﻿using PrisionBreak;
+﻿using System.Diagnostics;
+using PrisionBreak;
 
 Console.WriteLine("--Prision Break--");
 
@@ -11,10 +12,11 @@ Console.WriteLine("Random strategy");
 var randomBoxScenario = Enumerable.Range(1, prisoners).ToScrumbled();
 ExecuteScenario(randomBoxScenario, replay);
 
-Console.WriteLine();
+Console.WriteLine();    
 Console.WriteLine("Own box strategy");
 var ownBoxScenario = Enumerable.Range(1, prisoners).ToScrumbledWithOwnBoxStrategy();
 ExecuteScenario(ownBoxScenario, replay);
+
 
 void ExecuteScenario(IScrumbled<Box> boxContainer, int replay)
 {

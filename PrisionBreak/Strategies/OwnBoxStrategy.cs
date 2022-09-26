@@ -4,14 +4,15 @@ public class OwnBoxStrategy : BaseStrategy<Box>
 {
     protected override IEnumerable<Box> FindPathConcrete(IEnumerable<Box> boxCollection, int targetIdentifier)
     {
-        var hashSet = boxCollection.ToHashSet(new BoxIdentifierEqualityComparer());
-        var box = hashSet.GetValue(targetIdentifier);
+        var dictionary = boxCollection.ToDictionary(x => x.Identifier);
+
+        var box = dictionary[targetIdentifier];
 
         yield return box;
 
         while (box.Number != targetIdentifier)
         {
-            box = hashSet.GetValue(box.Number);
+            box = dictionary[box.Number];
             yield return box;
         }
     }
