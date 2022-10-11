@@ -2,5 +2,5 @@
 
 public interface IFindStrategy<T>
 {
-    IReadOnlyList<T> FindPath(IEnumerable<T> collection, int identifier);
+    Func<IEnumerable<T>, int, IPathFinder<T>> PathFinderFactory { get; }
 }

@@ -25,7 +25,7 @@ public class BoxContainer : IScrumbled<Box>
         new BoxContainer(CreateBoxes(this.Items.Select(x => x.Number).OrderBy(x => Random.Shared.Next())), this.findStategy);
 
     public IReadOnlyList<Box> GetPath(int identifier) => 
-        this.findStategy.FindPath(this.Items, identifier.NonNegativeOrZero());
+        this.findStategy.PathFinderFactory(this.Items, identifier).FindPath().ToList();
 
     private static IEnumerable<Box> CreateBoxes(IEnumerable<int> numbers)
     {
