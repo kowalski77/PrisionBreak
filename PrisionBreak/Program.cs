@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using PrisionBreak;
+﻿using PrisionBreak;
 
 Console.WriteLine("--Prision Break--");
 

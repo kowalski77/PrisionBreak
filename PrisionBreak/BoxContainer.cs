@@ -22,7 +22,7 @@ public class BoxContainer : IScrumbled<Box>
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
     public IScrumbled<Box> Scrumble() => 
-        new BoxContainer(CreateBoxes(this.Items.Select(x => x.Number).OrderBy(x => new Random().Next())), this.findStategy);
+        new BoxContainer(CreateBoxes(this.Items.Select(x => x.Number).OrderBy(x => Random.Shared.Next())), this.findStategy);
 
     public IReadOnlyList<Box> GetPath(int identifier) => 
         this.findStategy.FindPath(this.Items, identifier.NonNegativeOrZero());
