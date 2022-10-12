@@ -1,7 +1,7 @@
 ﻿namespace PrisionBreak.Strategies;
 
-public class RandomBoxStrategy : BaseStrategy<Box>
+public class RandomBoxStrategy : IFindStrategy<Box>
 {
-    public override Func<IEnumerable<Box>, int, IPathFinder<Box>> PathFinderFactory =>
+    public Func<IEnumerable<Box>, int, IPathFinder<Box>> PathFinderFactory =>
         (boxCollection, target) => new RandomBoxPathFinder(boxCollection, target);
 }

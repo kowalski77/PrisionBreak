@@ -1,7 +1,7 @@
 ﻿namespace PrisionBreak.Strategies;
 
-public class OwnBoxStrategy : BaseStrategy<Box>
+public class OwnBoxStrategy : IFindStrategy<Box>
 {
-    public override Func<IEnumerable<Box>, int, IPathFinder<Box>> PathFinderFactory => 
+    public Func<IEnumerable<Box>, int, IPathFinder<Box>> PathFinderFactory => 
         (boxCollection, target) => new OwnBoxPathFinder(boxCollection, target);
 }
