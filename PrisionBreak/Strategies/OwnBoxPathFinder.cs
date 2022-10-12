@@ -2,19 +2,17 @@
 
 public sealed class OwnBoxPathFinder : IPathFinder<Box>
 {
-    private readonly IEnumerable<Box> collection;
+    private readonly Dictionary<int, Box> dictionary;
     private readonly int targetIdentifier;
 
     public OwnBoxPathFinder(IEnumerable<Box> collection, int targetIdentifier)
     {
-        this.collection = collection;
+        this.dictionary = collection.ToDictionary(x => x.Identifier);
         this.targetIdentifier = targetIdentifier;
     }
 
     public IEnumerable<Box> FindPath()
     {
-        Dictionary<int, Box> dictionary = this.collection.ToDictionary(x => x.Identifier);
-
         Box box = dictionary[this.targetIdentifier];
 
         yield return box;
